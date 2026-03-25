@@ -1,0 +1,7 @@
+Technical Requirements (Implementation Needs)
+
+Python 3.x
+Flask framework → handles the web server
+hashlib → for hashing passwords
+HTML/CSS/JS → for the front-end interface
+Optional for deployment: Gunicorn
