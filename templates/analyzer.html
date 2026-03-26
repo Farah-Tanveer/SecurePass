@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SecurePass Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="analyzer-container">
+        <h1>SecurePass Password Analyzer</h1>
+        <form method="POST" action="/analyzer">
+    <input type="password" name="password" placeholder="Enter Password" required>
+    <button type="submit">Analyze</button>
+</form>
+
+        {% if result %}
+            <h2 style="color:#234C6A;">Results:</h2>
+            <p><strong>Strength:</strong> 
+                <span class="{% if result['strength']=='Weak' %}weak{% elif result['strength']=='Medium' %}medium{% else %}strong{% endif %}">
+                    {{ result['strength'] }}
+                </span>
+            </p>
+            <p><strong>Entropy:</strong> {{ result['entropy'] }} bits</p>
+            <p><strong>Common Password:</strong> {{ 'Yes' if result['common'] else 'No' }}</p>
+            <p><strong>MD5 Hash:</strong> {{ result['md5'] }}</p>
+            <p><strong>SHA256 Hash:</strong> {{ result['sha256'] }}</p>
+
+            <h3 style="color:#234C6A;">Feedback & Suggestions:</h3>
+            <div class="feedback">
+                <ul>
+                {% for msg in result['feedback'] %}
+                    <li>{{ msg }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
