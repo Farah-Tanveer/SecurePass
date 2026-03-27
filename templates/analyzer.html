@@ -1,38 +1,147 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SecurePass Analyzer</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+<title>SecurePass Analyzer</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}">
+
+<script defer
+src="{{ url_for('static', filename='script.js') }}">
+</script>
+
 </head>
 <body>
-    <div class="analyzer-container">
-        <h1>SecurePass Password Analyzer</h1>
-        <form method="POST" action="/analyzer">
-    <input type="password" name="password" placeholder="Enter Password" required>
-    <button type="submit">Analyze</button>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>SecurePass Analyzer</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body class="analyzer-page">
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+<div class="logo">
+SecurePass
+</div>
+
+<ul class="nav-links">
+
+<li><a href="/">Home</a></li>
+
+<li><a href="/analyzer">Analyzer</a></li>
+
+<li><a href="/about">About</a></li>
+
+<li><a href="/contact">Contact</a></li>
+
+</ul>
+
+</nav>
+
+
+
+<!-- CENTERED CONTENT -->
+
+<div class="analyzer-wrapper">
+
+<div class="analyzer-container">
+
+<h2>Password Strength Analyzer</h2>
+
+
+<form method="POST">
+
+<div class="input-group">
+
+<input
+type="password"
+name="password"
+placeholder="Enter your password"
+required>
+
+<button type="submit">
+
+Analyze Password
+
+</button>
+
+</div>
+
 </form>
 
-        {% if result %}
-            <h2 style="color:#234C6A;">Results:</h2>
-            <p><strong>Strength:</strong> 
-                <span class="{% if result['strength']=='Weak' %}weak{% elif result['strength']=='Medium' %}medium{% else %}strong{% endif %}">
-                    {{ result['strength'] }}
-                </span>
-            </p>
-            <p><strong>Entropy:</strong> {{ result['entropy'] }} bits</p>
-            <p><strong>Common Password:</strong> {{ 'Yes' if result['common'] else 'No' }}</p>
-            <p><strong>MD5 Hash:</strong> {{ result['md5'] }}</p>
-            <p><strong>SHA256 Hash:</strong> {{ result['sha256'] }}</p>
 
-            <h3 style="color:#234C6A;">Feedback & Suggestions:</h3>
-            <div class="feedback">
-                <ul>
-                {% for msg in result['feedback'] %}
-                    <li>{{ msg }}</li>
-                {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
-    </div>
+
+{% if result %}
+
+<div class="result-box">
+
+<h3>Password Analysis Report</h3>
+
+<p>
+<strong>Length:</strong>
+{{ result.length }}
+</p>
+
+<p>
+<strong>Strength:</strong>
+{{ result.strength }}
+</p>
+
+<p>
+<strong>Entropy:</strong>
+{{ result.entropy }} bits
+</p>
+
+<p>
+<strong>SHA-256 Hash:</strong>
+<br>
+<span class="hash-text">
+{{ result.hash }}
+</span>
+</p>
+
+
+{% if result.suggestions %}
+
+<h4>Suggestions</h4>
+
+<ul>
+
+{% for s in result.suggestions %}
+<li>{{ s }}</li>
+{% endfor %}
+
+</ul>
+
+{% endif %}
+
+</div>
+
+{% endif %}
+</div>
+
+</div>
+
+
 </body>
+
+</html>
+</body>
+
+
 </html>

@@ -2,15 +2,59 @@
 <html>
 <head>
     <title>SecurePass</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <script defer
+        src="{{ url_for('static', filename='script.js') }}">
+    </script>
 </head>
-<body>
-    <div class="landing-container">
-        <h1>Welcome to SecurePass</h1>
-        <p>Your professional password security analysis toolkit</p>
-        <a href="/analyzer" class="get-started-btn">
-    <button>Get Started</button>
+
+<body class="landing-page">
+
+<!-- Navbar -->
+
+<nav class="navbar">
+
+<div class="logo">
+SecurePass
+</div>
+
+<ul class="nav-links">
+
+<li><a href="/">Home</a></li>
+<li><a href="/analyzer">Analyzer</a></li>
+<li><a href="/about.html">About</a></li>
+<li><a href="/contact.html">Contact</a></li>
+
+</ul>
+
+</nav>
+
+
+<!-- Hero Section -->
+
+<div class="hero">
+
+<div class="hero-content">
+
+<h1>
+Protect Your Passwords  
+Before Hackers Find Them
+</h1>
+
+<p>
+SecurePass analyzes your password strength, detects vulnerabilities,
+and helps you build stronger protection against cyber threats.
+</p>
+
+<a href="/analyzer" class="get-started-btn">
+Analyze Your Password
 </a>
-    </div>
+</div>
+
+</div>
+
 </body>
 </html>
