@@ -1,25 +1,8 @@
 <!DOCTYPE html>
-<html>
-<head>
-
-<title>SecurePass Analyzer</title>
-
-<link rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}">
-
-<script defer
-src="{{ url_for('static', filename='script.js') }}">
-</script>
-
-</head>
-<body>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
-
 <title>SecurePass Analyzer</title>
 
 <link rel="stylesheet"
@@ -27,23 +10,17 @@ href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
-
 <body class="analyzer-page">
-
 
 <!-- NAVBAR -->
 
 <nav class="navbar">
 
-<div class="logo">
-SecurePass
-</div>
+<div class="logo">SecurePass</div>
 
 <ul class="nav-links">
 
 <li><a href="/">Home</a></li>
-
-<li><a href="/analyzer">Analyzer</a></li>
 
 <li><a href="/about">About</a></li>
 
@@ -55,93 +32,143 @@ SecurePass
 
 
 
-<!-- CENTERED CONTENT -->
+<!-- MAIN CONTENT -->
 
 <div class="analyzer-wrapper">
 
-<div class="analyzer-container">
+<div class="analyzer-layout">
 
-<h2>Password Strength Analyzer</h2>
+<!-- MAIN ANALYZER CARD -->
+
+<div class="analyzer-wrapper">
+
+    <!-- LEFT CARD -->
+
+    <div class="analyzer-card">
+
+        <h2>Password Analyzer</h2>
+
+        <form method="POST">
+
+            <div class="input-group">
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+                <button type="submit">
+                    Analyze Password
+                </button>
+
+            </div>
+
+        </form>
 
 
-<form method="POST">
+        {% if result %}
 
-<div class="input-group">
+        <div class="result-section">
 
-<input
-type="password"
-name="password"
-placeholder="Enter your password"
-required>
-
-<button type="submit">
-
-Analyze Password
-
-</button>
-
-</div>
-
-</form>
-
-
-
-{% if result %}
-
-<div class="result-box">
-
-<h3>Password Analysis Report</h3>
-
-<p>
-<strong>Length:</strong>
-{{ result.length }}
-</p>
-
-<p>
+            <p>
+                <strong>Length:</strong>
+            {{ result.length }}
+            </p>
+            <p>
 <strong>Strength:</strong>
+
+<span class="strength-text 
+{{ result.strength|lower|replace(' ', '-') }}">
+
 {{ result.strength }}
-</p>
 
-<p>
-<strong>Entropy:</strong>
-{{ result.entropy }} bits
-</p>
-
-<p>
-<strong>SHA-256 Hash:</strong>
-<br>
-<span class="hash-text">
-{{ result.hash }}
 </span>
+
 </p>
+<p>
 
+<strong>Common Password Check:</strong>
 
-{% if result.suggestions %}
+{% if result.is_common %}
 
-<h4>Suggestions</h4>
+<span class="weak-text">
+⚠ This password is commonly used and unsafe!
+</span>
 
-<ul>
+{% else %}
 
-{% for s in result.suggestions %}
-<li>{{ s }}</li>
-{% endfor %}
-
-</ul>
-
-{% endif %}
-
-</div>
+<span class="strong-text">
+✔ This password is not in common password lists.
+</span>
 
 {% endif %}
-</div>
+
+</p>
+      <p>
+      <strong>Entropy:</strong>
+            {{ result.entropy }} bits
+      </p>
+
+      <p>
+            <strong>MD5:</strong>
+            <span class="hash-box">
+                  {{ result.md5 }}
+            </span>
+            </p>
+
+            <p>
+            <strong>SHA256:</strong>
+            <span class="hash-box">
+                  {{ result.sha256 }}
+            </span>
+            </p>
+
+      </div>
+
+      {% endif %}
 
 </div>
 
 
-</body>
 
-</html>
-</body>
+<!-- RIGHT CARD -->
 
+    {% if result %}
+
+    <div class="suggestions-card">
+
+        <h2>Suggestions & Feedback</h2>
+
+        {% if result.suggestions %}
+
+        <ul>
+
+        {% for s in result.suggestions %}
+
+            <li>{{ s }}</li>
+
+        {% endfor %}
+
+        </ul>
+
+        {% else %}
+
+        <p class="success-message">
+
+            ✔ All rules satisfied!  
+            Your password follows recommended security rules.
+
+        </p>
+
+        {% endif %}
+
+    </div>
+
+    {% endif %}
+
+</div>
+</body>
 
 </html>

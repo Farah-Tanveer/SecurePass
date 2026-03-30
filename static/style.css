@@ -241,66 +241,9 @@ box-shadow: 0 0 20px rgba(79,195,247,.8);
 
 
 /* ===============================
-   ANALYZER PAGE (FIXED CENTERING)
+   ANALYZER PAGE BACKGROUND
 ================================ */
-/* Wrapper */
 
-.analyzer-wrapper {
-
-flex: 1;
-
-display: flex;
-
-align-items: center;
-
-justify-content: flex-start;
-
-padding-left: 10%;
-
-}
-
-
-/* Analyzer Card */
-
-.analyzer-container {
-
-width: 460px;
-
-background: rgba(79,195,247,0.07);
-
-padding: 38px;
-
-border-radius: 18px;
-
-backdrop-filter: blur(14px);
-
-border: 1px solid rgba(79,195,247,.25);
-
-box-shadow: 0 8px 35px rgba(0,0,0,.7);
-
-}
-
-
-/* Input Centered */
-
-.input-group {
-
-display: flex;
-
-flex-direction: column;
-
-align-items: center;
-
-gap: 14px;
-
-}
-
-.input-group input,
-.input-group button {
-
-width: 90%;
-
-}
 .analyzer-page {
 
 background:
@@ -321,7 +264,9 @@ flex-direction: column;
 }
 
 
-/* Perfect vertical center */
+/* ===============================
+   MAIN WRAPPER
+================================ */
 
 .analyzer-wrapper {
 
@@ -329,18 +274,22 @@ flex: 1;
 
 display: flex;
 
-align-items: center;     /* vertical center */
+align-items: center;      /* vertical center */
 
 justify-content: flex-start;
+
+gap: 40px;
 
 padding-left: 8%;
 
 }
 
 
-/* Analyzer Card */
+/* ===============================
+   ANALYZER CARD (LEFT)
+================================ */
 
-.analyzer-container {
+.analyzer-card {
 
 width: 460px;
 
@@ -356,12 +305,14 @@ border: 1px solid rgba(79,195,247,.25);
 
 box-shadow: 0 8px 35px rgba(0,0,0,.7);
 
+animation: fadeUp .7s ease;
+
 }
 
 
 /* Heading */
 
-.analyzer-container h2 {
+.analyzer-card h2 {
 
 font-size: 27px;
 
@@ -372,7 +323,9 @@ margin-bottom: 25px;
 }
 
 
-/* Input Group */
+/* ===============================
+   INPUT GROUP
+================================ */
 
 .input-group {
 
@@ -380,14 +333,14 @@ display: flex;
 
 flex-direction: column;
 
-align-items: center;  /* centers input */
+align-items: center;
 
 gap: 14px;
 
 }
 
 
-/* Input */
+/* INPUT */
 
 .input-group input {
 
@@ -408,55 +361,13 @@ color: white;
 }
 
 
-/* Button */
+/* BUTTON */
 
 .input-group button {
 
 width: 90%;
 
 padding: 14px;
-
-background: #1FA6D8;
-
-border: none;
-
-color: white;
-
-border-radius: 10px;
-
-font-size: 16px;
-
-cursor: pointer;
-
-transition: .3s;
-
-}
-
-.input-group button:hover {
-
-background: #33C3F0;
-
-}
-
-
-/* Result */
-
-.result-box {
-
-margin-top: 20px;
-
-padding: 18px;
-
-background: rgba(79,195,247,.14);
-
-border-radius: 10px;
-
-}
-/* Button */
-
-.input-group button {
-
-padding: 15px;
 
 background: #1FA6D8;
 
@@ -489,24 +400,209 @@ box-shadow: 0 0 18px rgba(79,195,247,.8);
 }
 
 
-/* Result Box */
+/* ===============================
+   RESULT SECTION (INSIDE CARD)
+================================ */
 
-.result-box {
+.result-section {
 
 margin-top: 25px;
 
-padding: 20px;
+padding-top: 15px;
 
-background: rgba(79,195,247,.12);
-
-border-radius: 12px;
-
-font-size: 15px;
+border-top: 1px solid rgba(255,255,255,0.15);
 
 animation: fadeUp .7s ease;
 
 }
 
+
+/* HASH BOX */
+
+.hash-box {
+
+margin-top: 8px;
+
+font-size: 13px;
+
+word-wrap: break-word;
+
+background: rgba(0,0,0,0.25);
+
+padding: 8px;
+
+border-radius: 8px;
+
+}
+
+
+/* ===============================
+   SUGGESTIONS CARD (RIGHT)
+================================ */
+
+.suggestions-card {
+
+width: 320px;
+
+background: rgba(79,195,247,0.09);
+
+backdrop-filter: blur(14px);
+
+padding: 25px;
+
+border-radius: 18px;
+
+border: 1px solid rgba(79,195,247,.25);
+
+animation: slideInRight .6s ease;
+
+}
+
+
+/* Suggestions Heading */
+
+.suggestions-card h2 {
+
+color: #4FC3F7;
+
+margin-bottom: 12px;
+
+}
+
+
+/* LIST */
+
+.suggestions-card ul {
+
+padding-left: 20px;
+
+margin-top: 10px;
+
+}
+
+.suggestions-card li {
+
+margin-bottom: 8px;
+
+}
+
+
+/* SUCCESS MESSAGE */
+
+.success-message {
+
+color: #4caf50;
+
+font-weight: bold;
+
+margin-top: 10px;
+
+}
+
+
+/* ===============================
+   ANIMATIONS
+================================ */
+
+@keyframes fadeUp {
+
+from {
+
+opacity: 0;
+
+transform: translateY(30px);
+
+}
+
+to {
+
+opacity: 1;
+
+transform: translateY(0);
+
+}
+
+}
+
+
+@keyframes slideInRight {
+
+from {
+
+opacity: 0;
+
+transform: translateX(60px);
+
+}
+
+to {
+
+opacity: 1;
+
+transform: translateX(0);
+
+}
+
+}
+/* ===============================
+   STRENGTH TEXT COLORS
+================================ */
+
+.strength-text {
+
+font-weight: bold;
+
+padding: 4px 10px;
+
+border-radius: 8px;
+
+margin-left: 6px;
+
+}
+
+
+/* Weak */
+
+.strength-text.weak {
+
+background: rgba(255,77,77,0.25);
+
+color: #ff4d4d;
+
+}
+
+
+/* Moderate */
+
+.strength-text.moderate {
+
+background: rgba(255,165,0,0.25);
+
+color: #ffa500;
+
+}
+
+
+/* Strong */
+
+.strength-text.strong {
+
+background: rgba(76,175,80,0.25);
+
+color: #4caf50;
+
+}
+
+
+/* Very Strong */
+
+.strength-text.very-strong {
+
+background: rgba(156,39,176,0.25);
+
+color: #9c27b0;
+
+}
 /* ===============================
    ABOUT & CONTACT PAGE
 ================================ */
@@ -735,5 +831,20 @@ border-radius: 8px;
 display: block;
 
 margin-top: 8px;
+
+}
+.weak-text {
+
+color: #ff4d4d;
+
+font-weight: bold;
+
+}
+
+.strong-text {
+
+color: #4caf50;
+
+font-weight: bold;
 
 }
